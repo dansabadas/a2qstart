@@ -21,12 +21,19 @@ export class CustomersComponent implements OnInit {
     }
 
     ngOnInit(){
-        
-        this._customerService.getCustomers()
-        .then((customers) => this.customers = customers)
-        .catch((err) => {
-            console.log(err);
-        });
+        //rx observable version with subscrie version
+        this._customerService.getCustomers_RxObservable()
+            .subscribe(
+                (customers) => this.customers = customers,
+                (err) => { console.log(err); }
+            );
+
+        //straight up promise
+        // this._customerService.getCustomers()
+        // .then((customers) => this.customers = customers)
+        // .catch((err) => {
+        //     console.log(err);
+        // });
 
         //promises-observables
         // this.customers = this._customerService.getCustomers()
